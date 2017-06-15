@@ -1,15 +1,25 @@
 # ex3mp/apache
+
 ## REQUIRES
+
 jwilder/nginx-proxy and a network
 
+## TESTED SUPPORTS
+
+- Processwire
+- CraftCMS
+
 ## ENVS
+
 - APACHE_SERVERNAME
 - APACHE_SERVERALIAS
 
 ## INSTALL
+
 1. create a network `create network with: docker network create nginx-proxy`
 
 2. startup your "master" nginx-proxy (example down here)
+
 ```
 version: '2'
 services:
