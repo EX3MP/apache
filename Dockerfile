@@ -2,6 +2,7 @@ FROM php:7.1-apache
 
 ENV APACHE_SERVERNAME localhost
 ENV APACHE_SERVERALIAS docker.local
+ENV APACHE_SERVERADMIN c@docker.local
 
 # Install selected extensions and other stuff
 RUN apt-get update \

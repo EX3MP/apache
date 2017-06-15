@@ -22,6 +22,10 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+networks:
+  default:
+    external:
+      name: nginx-proxy
 ```
 
 3. create a new folder and copy the content from exampel in there.
