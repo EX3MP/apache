@@ -3,6 +3,8 @@ FROM php:7.1-apache
 ENV APACHE_SERVERNAME localhost
 ENV APACHE_SERVERALIAS docker.local
 ENV APACHE_SERVERADMIN c@docker.local
+ENV APACHE_LOG_DIR /var/log/apache2
+
 
 # Install selected extensions and other stuff
 RUN apt-get update \
@@ -47,6 +49,13 @@ RUN docker-php-ext-install zip
 RUN docker-php-ext-install mbstring
 
 RUN a2enmod rewrite
+
+# Clean image
+RUN apt-get -yqq clean && \
+    apt-get -yqq purge && \
+    rm -rf /tmp/* /var/tmp/* && \
+    rm -rf /var/lib/apt/lists/*
+
 
 EXPOSE 80
 
