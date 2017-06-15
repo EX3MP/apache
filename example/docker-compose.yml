@@ -1,0 +1,28 @@
+version: '2'
+services:
+  mysql:
+    restart: unless-stopped
+    image: mariadb
+    environment:
+      MYSQL_PORT_3306_TCP: 3306
+      # MYSQL_ROOT_PASSWORD: 
+      # MYSQL_USER: docker
+      # MYSQL_PASSWORD: docker
+    volumes:
+        - "./mysql/:/var/lib/mysql:rw"
+
+  apache:
+    restart: unless-stopped
+    image: ex3mp/apache
+    links:
+      - mysql:db
+    volumes:
+      - ./app:/var/www
+    environment:
+      APACHE_SERVERALIAS: docker.local
+      VIRTUAL_HOST: docker.local
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
