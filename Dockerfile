@@ -41,7 +41,7 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install mbstring
 
-ADD 001-default.conf /etc/apache2/sites-available/
+ADD 001-docker.conf /etc/apache2/sites-available/
 
 RUN a2enmod rewrite
 
