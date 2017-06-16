@@ -1,11 +1,5 @@
 FROM php:7.1-apache
 
-ENV APACHE_SERVERNAME localhost
-ENV APACHE_SERVERALIAS docker.local
-ENV APACHE_SERVERADMIN c@docker.local
-ENV APACHE_LOG_DIR /var/log/apache2
-
-
 # Install selected extensions and other stuff
 RUN apt-get update \
     && apt-get -y --no-install-recommends install git php7-mysql php7-gd php7-imagick php7-twig php7-xdebug \
@@ -14,7 +8,6 @@ RUN apt-get update \
 # php config
 COPY php.ini /usr/local/etc/php/
 COPY php.ini /etc/php5/apache2/conf.d/
-COPY 000-default.conf /etc/apache2/sites-available/
 
 # PDO & mysqli
 RUN docker-php-ext-install pdo pdo_mysql mysqli
@@ -48,6 +41,8 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-install zip
 RUN docker-php-ext-install mbstring
 
+ADD 001-default.conf /etc/apache2/sites-available/
+
 RUN a2enmod rewrite
 
 # Clean image
@@ -56,6 +51,10 @@ RUN apt-get -yqq clean && \
     rm -rf /tmp/* /var/tmp/* && \
     rm -rf /var/lib/apt/lists/*
 
+ENV APACHE_SERVERNAME localhost
+ENV APACHE_SERVERALIAS docker.local
+ENV APACHE_SERVERADMIN c@docker.local
+ENV APACHE_LOG_DIR /var/log/apache2
 
 EXPOSE 80
 
