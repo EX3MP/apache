@@ -1,8 +1,12 @@
 FROM php:7.1-apache
 
+ENV AP_SERVERNAME localhost
+ENV AP_SERVERALIAS docker.local
+ENV AP_SERVERADMIN c@docker.local
+
 # Install selected extensions and other stuff
 RUN apt-get update \
-    && apt-get -y --no-install-recommends install git php7-mysql php7-gd php7-imagick php7-twig php7-xdebug \
+    && apt-get -y --no-install-recommends install git \
     && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 # php config
@@ -42,6 +46,7 @@ RUN docker-php-ext-install zip
 RUN docker-php-ext-install mbstring
 
 ADD 001-docker.conf /etc/apache2/sites-available/
+RUN ln -s /etc/apache2/sites-available/001-docker.conf /etc/apache2/sites-enabled/
 
 RUN a2enmod rewrite
 
@@ -50,11 +55,6 @@ RUN apt-get -yqq clean && \
     apt-get -yqq purge && \
     rm -rf /tmp/* /var/tmp/* && \
     rm -rf /var/lib/apt/lists/*
-
-ENV APACHE_SERVERNAME localhost
-ENV APACHE_SERVERALIAS docker.local
-ENV APACHE_SERVERADMIN c@docker.local
-ENV APACHE_LOG_DIR /var/log/apache2
 
 EXPOSE 80
 
