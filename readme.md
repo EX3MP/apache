@@ -1,5 +1,13 @@
 # ex3mp/apache
 
+## INFOS
+
+- vhosts points at /var/www/public (./app/public)
+- default MySQL DB is website and you can connect via 
+  - host db
+  - user docker
+  - pass docker
+
 ## REQUIRES
 
 jwilder/nginx-proxy and a network
