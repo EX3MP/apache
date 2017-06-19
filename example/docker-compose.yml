@@ -19,7 +19,8 @@ services:
     volumes:
       - ./app:/var/www
     environment:
-      APACHE_SERVERALIAS: docker.local
+      AP_ROOT: /var/www/public
+      AP_SERVERALIAS: docker.local
       VIRTUAL_HOST: docker.local
 
 networks:
