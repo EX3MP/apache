@@ -3,7 +3,7 @@ FROM php:5.6-apache
 ENV AP_SERVERNAME localhost
 ENV AP_SERVERALIAS docker.local
 ENV AP_SERVERADMIN c@docker.local
-
+ENV AP_ROOT /var/www
 
 # Install selected extensions and other stuff
 RUN apt-get update \
