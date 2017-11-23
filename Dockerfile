@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:7.0-apache
 
 ENV AP_SERVERNAME localhost
 ENV AP_SERVERALIAS docker.local
